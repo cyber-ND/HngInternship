@@ -1,61 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+// ...existing code...
+# Backend Wizards - Stage 0: Dynamic Profile Endpoint
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Table of Contents
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Setup Instructions](#setup-instructions)
+  - [Windows Setup](#windows-setup)
+  - [MacOS/Linux Setup](#macoslinux-setup)
+- [API Endpoint](#api-endpoint)
+- [Example Response](#example-response)
+- [License](#license)
 
-## About Laravel
+## Overview
+The Backend Wizards Stage 0 project is a streamlined Laravel application that exposes a `/me` endpoint. The endpoint returns user profile information (name, email, tech stack) and a random cat fact fetched from an external API. Built with Laravel 10.x, the project follows best practices for clean code, modularity, and configuration.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Prerequisites
+Before setting up the project, ensure the following are installed:
+- PHP >= 8.1
+- Composer (PHP dependency manager)
+- Node.js and npm (optional, for frontend assets)
+- Git
+- Web server (e.g., Apache, Nginx, or Laravel’s built-in server for local development)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Setup Instructions
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Windows Setup
+1. Clone the repository:
+   ```
+   git clone https://github.com/cyber-ND/HngInternship.git
+   cd HngInternship/stage0
+   ```
+2. Install PHP dependencies:
+   ```
+   composer install
+   ```
+3. (Optional) Install Node.js (for vite) dependencies:
+   ```
+   npm install
+   ```
+4. Configure environment file:
+   ```
+   copy .env.example .env
+   ```
+5. Generate application key:
+   ```
+   php artisan key:generate
+   ```
+6. Update environment variables in `.env`:
+   ```
+   USER_NAME="Your Full Name"
+   USER_EMAIL="your.email@example.com"
+   USER_STACK="PHP/Laravel"
+   CAT_FACTS_API_URL=https://catfact.ninja/fact
+   ```
+7. Run the application:
+   ```
+   php artisan serve
+   ```
+   Access the application at: `http://localhost:8000`
 
-## Learning Laravel
+### MacOS/Linux Setup
+1. Clone the repository:
+   ```
+   git clone https://github.com/cyber-ND/HngInternship.git
+   cd HngInternship/stage0
+   ```
+2. Install PHP dependencies:
+   ```
+   composer install
+   ```
+3. (Optional) Install Node.js (for vite) dependencies:
+   ```
+   npm install
+   ```
+4. Configure environment file:
+   ```
+   cp .env.example .env
+   ```
+5. Generate application key:
+   ```
+   php artisan key:generate
+   ```
+6. Update environment variables in `.env`:
+   ```
+   USER_NAME="Your Full Name"
+   USER_EMAIL="your.email@example.com"
+   USER_STACK="PHP/Laravel"
+   CAT_FACTS_API_URL=https://catfact.ninja/fact
+   ```
+7. Run the application:
+   ```
+   php artisan serve
+   ```
+   Access the application at: `http://localhost:8000`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### Key Differences Between Windows and MacOS/Linux
+- Command syntax: Windows uses `copy`, MacOS/Linux uses `cp`.
+- Terminal environment: Windows commonly uses PowerShell or Command Prompt; MacOS/Linux use Bash/Zsh.
+- Path handling: Windows uses backslashes (`C:\...`), Unix uses forward slashes (`/home/...`).
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## API Endpoint
+### GET /me
+Retrieves user profile information and a random cat fact.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Important: Use `/me` directly (no `/api` prefix).
 
-## Laravel Sponsors
+## Example Response
+A successful request returns JSON like:
+```json
+{
+  "status": "success",
+  "user": {
+    "email": "hnginstructor@gmail.com",
+    "name": "HNG INSTRUCTOR",
+    "stack": "PHP/Laravel"
+  },
+  "timestamp": "2025-10-16T01:49:56.789Z",
+  "fact": "Cats can jump up to six times their length."
+}
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Author
+Nwankpa Ndubuisi Chidiebube
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
